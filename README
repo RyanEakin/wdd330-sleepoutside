@@ -2,7 +2,8 @@ step 1. go into VS Code
 step 2. select source control sidebar button [the tree button on the left side]
 step 3. click repositories
 step 4. click main branch name
-step 5. create new branch if not already there
+step 5. create "new branch from" if not already there
+step 5 1/2. pick Main branch
 step 6. type <your-initials/name-here>--test-branch into the new branch name
 step 7. press enter/return, and then commit changes.
 
