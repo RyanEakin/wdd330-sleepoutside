@@ -4,11 +4,12 @@ step 3. click repositories
 step 4. click main branch name
 step 5. create "new branch from" if not already there
 step 5 1/2. pick Main branch
-step 6. type <your-initials/name-here>--test-branch into the new branch name
+step 6. type <your-initials/name-here>--test-feature-branch into the new branch name
 step 7. press enter/return, and then commit changes.
 
-NOTE: make sure not to commit to main branch. to do so follow these steps
+NOTE: make sure NOT to commit to main branch. to do so follow these steps
 a. click source control in VS code [the tree button on the left side]
 b. then click repositories
 c. then click branch name
 d. then click the test branch with YOUR NAME/initials
+e. now you can commit as you did before. make sure that you are NOT sending it to main.
