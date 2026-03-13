@@ -1,4 +1,7 @@
-import ProductData from "./ProductData.mjs";
+import ProductData from "./tents.json";
+/*import ProductList class as a module.then create an
+instance of the ProductList class,and make sure you can see the list of products*/
+
 
 const dataSource = new ProductData("tents");
 const featuredProductIds = ["880RR", "989CG", "985PR", "344YJ"];
