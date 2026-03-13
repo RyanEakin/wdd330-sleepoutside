@@ -4,27 +4,35 @@
 as flexible and reusable as possible, the constructor should receive the parameters: category, dataSource,
 and the HTML element (listElement) as an output target*/
 export default class ProductList {
-  constructor(category, dataSource, listElement) {
-    this.category = category;
-    this.dataSource = dataSource;
-    this.listElement = listElement;
-  }
-  /*Next, add a method called renderList(). This method will be responsible for generating the HTML for the product cards
-  and inserting them into the listElement */
-  async renderList() {
-    const products = await this.dataSource.getData();
-    const categoryProducts = products.filter(
-      (product) => product.Category === this.category
-    );
-    this.listElement.innerHTML = categoryProducts
-      .map(
-        (product) => `
-      <div class="product-card">
-        <img src="${product.Image}" alt="${product.Name}" class="product-image"/>
-        <h3 class="product-name">${product.Name}</h3>
-        <p class="product-price">$${product.Price.toFixed(2)}</p>
-        <a href="product.html?id=${product.Id}" class="product-link">View Details</a>
-      </div>
-    `).join("");
-  }
+    constructor(category, dataSource, listElement) {
+        this.category = category;
+        this.dataSource = dataSource;
+        this.listElement = listElement;
+    }
+    /*Next, add a method called renderList(). This method will be responsible for generating the HTML for the product cards
+    and inserting them into the listElement */
+    async renderList() {
+        const products = await this.dataSource.getData();
+        const productPageMap = {
+            "880RR": "product_pages/marmot-ajax-3.html",
+            "989CG": "product_pages/northface-talus-4.html",
+            "985PR": "product_pages/northface-alpine-3.html",
+            "344YJ": "product_pages/cedar-ridge-rimrock-2.html",
+        };
+
+        this.listElement.innerHTML = products
+            .map(
+                (product) => `
+      <li class="product-card">
+        <a href="${productPageMap[product.Id] || "#"}">
+          <img src="${product.Image.replace("../", "/")}" alt="${product.NameWithoutBrand}" />
+          <h3 class="card__brand">${product.Brand?.Name || ""}</h3>
+          <h2 class="card__name">${product.NameWithoutBrand}</h2>
+          <p class="product-card__price">$${Number(product.FinalPrice).toFixed(2)}</p>
+        </a>
+      </li>
+    `
+            )
+            .join("");
+    }
 }
