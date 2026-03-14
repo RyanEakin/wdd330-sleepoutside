@@ -21,3 +21,24 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+//make a new function called renderListWithTemplate and export it.It has 5 arguments:templateFn, parentElement, list, position, and clear.
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false
+) {
+  let html = "";
+  list.forEach((item) => {
+    html += templateFn(item);
+  });
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  if (position === "afterbegin") {
+    parentElement.insertAdjacentHTML("afterbegin", html);
+  } else {
+    parentElement.innerHTML = html;
+  }
+}   
