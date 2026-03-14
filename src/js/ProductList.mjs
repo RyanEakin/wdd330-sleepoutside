@@ -1,3 +1,5 @@
+import { renderListWithTemplate } from "./utils.mjs";
+
 /*The purpose of this script is to generate a list of product cards in HTML from an array*/
 /*Add a class called ProductList and export this class as default. Start with the constructor*/
 /*there are more than one category of products that will need to be independently listed. To make the ProductList class
@@ -40,20 +42,17 @@ export default class ProductList {
             listElement = this.listElement,
             template = productCardTemplate,
             linkResolver = resolveProductUrl,
-            insertMode = "replace",
+            position = "replace",
+            insertMode,
+            clear = false,
         } = options;
 
         const items = products ?? await this.dataSource.getData();
 
-        const html = items
-            .map((product) => template(product, linkResolver(product)))
-            .join("");
+        const renderPosition = (insertMode ?? position) === "afterbegin" ? "afterbegin" : "replace";
+        const templateFn = (product) => template(product, linkResolver(product));
 
-        if (insertMode === "afterbegin") {
-            listElement.insertAdjacentHTML("afterbegin", html);
-        } else {
-            listElement.innerHTML = html;
-        }
+        renderListWithTemplate(templateFn, listElement, items, renderPosition, clear);
 
         return items;
     }
