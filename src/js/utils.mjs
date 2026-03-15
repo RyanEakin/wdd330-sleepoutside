@@ -20,6 +20,6 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("touchend", (event) => {
     event.preventDefault();
     callback();
-  });
+  }); 
   qs(selector).addEventListener("click", callback);
 }
