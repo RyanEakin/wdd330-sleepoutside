@@ -263,7 +263,7 @@ footer {
 }
 
 .hide {
-  /* display: none; */
+  display: none;
 }
 
 .cart-footer {
