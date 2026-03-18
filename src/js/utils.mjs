@@ -38,3 +38,31 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   const htmlStrings = list.map(templateFn)
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 }
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  if (callback) { // if there is a callback function (true), then run this code
+    callback(data); // this executes the function in 'callback' parameter with the parameter of data
+
+  }
+  parentElement.innerHTML = `${template}`; // this adds the  template to the selected element in the webpage
+}
+
+export async function loadTemplate(fPath) {
+  const templateFile = await fetch(fPath); // this collects the file contents from the path
+  const templateHTML = await templateFile.text(); // this makes the contents into a string
+  return templateHTML;
+}
+
+export function LoadHeaderFooter() {
+  // 1. load the header and footer templates
+  const headerTemplate = loadTemplate('../partials/header.html');
+  const footerTemplate = loadTemplate('../partials/footer.html');
+
+  // 2. grab the header and footer placeholder elements out of the Document Object Model
+  const face = document.getElementById('head'); // header
+  const boot = document.getElementById('foot'); // footer
+
+  // 3. render the header and footer
+  renderWithTemplate(headerTemplate, face); // renders header at selected header element ID
+  renderWithTemplate(footerTemplate, boot); // renders footer at selected footer element ID
+}
