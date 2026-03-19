@@ -4,6 +4,8 @@ const pauseResumeButton = document.getElementById("pauseResumeCountdown");
 const resetButton = document.getElementById("resetCountdown");
 const timeInput = document.getElementById("time");
 const form = document.querySelector("form");
+const usersStatus = document.getElementById("usersStatus");
+const usersList = document.getElementById("usersList");
 
 let intervalId = null;
 let remainingTime = 0;
@@ -125,3 +127,30 @@ resetCountdownDisplay();
 startButton.addEventListener("click", startCountdown);
 pauseResumeButton.addEventListener("click", togglePauseResume);
 resetButton.addEventListener("click", resetCountdown);
+
+async function getUsers() {
+  usersStatus.textContent = "Loading users...";
+  usersList.innerHTML = "";
+
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+    if (!response.ok) {
+      throw new Error(`Request failed with status ${response.status}`);
+    }
+
+    const users = await response.json();
+
+    users.forEach((user) => {
+      const listItem = document.createElement("li");
+      listItem.textContent = `${user.name} (${user.email})`;
+      usersList.appendChild(listItem);
+    });
+
+    usersStatus.textContent = "";
+  } catch (error) {
+    usersStatus.textContent = "Unable to load users. Please try again.";
+  }
+}
+
+getUsers();
