@@ -41,4 +41,28 @@ export function renderListWithTemplate(
   } else {
     parentElement.innerHTML = html;
   }
-}   
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.insertAdjacentHTML("afterbegin", template);
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const response = await fetch(path);
+  const html = await response.text();
+  return html;
+}
+
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate("/partials/header.html");
+  const footerTemplate = await loadTemplate("/partials/footer.html");
+
+  const headerElement = document.querySelector("header");
+  const footerElement = document.querySelector("footer");
+
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
+}

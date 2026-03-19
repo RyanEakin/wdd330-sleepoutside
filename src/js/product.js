@@ -1,5 +1,7 @@
-import { setLocalStorage } from "./utils.mjs";
+import { setLocalStorage, loadHeaderFooter } from "./utils.mjs";
 import ProductData from "./ProductData.mjs";
+
+loadHeaderFooter();
 
 const dataSource = new ProductData("tents");
 
