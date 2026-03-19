@@ -21,6 +21,12 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+export function getParam(param) {
+  const searchParams = new URLSearchParams(window.location.search);
+  return searchParams.get(param);
+}
+
 //make a new function called renderListWithTemplate and export it.It has 5 arguments:templateFn, parentElement, list, position, and clear.
 export function renderListWithTemplate(
   templateFn,

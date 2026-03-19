@@ -6,10 +6,12 @@ import { renderListWithTemplate } from "./utils.mjs";
 as flexible and reusable as possible, the constructor should receive the parameters: category, dataSource,
 and the HTML element (listElement) as an output target*/
 function productCardTemplate(product, productUrl = "#") {
+    const image = product.Images?.PrimaryMedium || product.Image?.replace("../", "/") || "";
+
     return `
       <li class="product-card">
         <a href="${productUrl}">
-          <img src="${product.Image.replace("../", "/")}" alt="${product.NameWithoutBrand}" />
+                    <img src="${image}" alt="${product.NameWithoutBrand}" />
           <h3 class="card__brand">${product.Brand?.Name || ""}</h3>
           <h2 class="card__name">${product.NameWithoutBrand}</h2>
           <p class="product-card__price">$${Number(product.FinalPrice).toFixed(2)}</p>
@@ -18,15 +20,8 @@ function productCardTemplate(product, productUrl = "#") {
     `;
 }
 
-const productPageMap = {
-    "880RR": "/product_pages/marmot-ajax-3.html",
-    "989CG": "/product_pages/northface-talus-4.html",
-    "985PR": "/product_pages/northface-alpine-3.html",
-    "344YJ": "/product_pages/cedar-ridge-rimrock-2.html",
-};
-
-function resolveProductUrl(product) {
-    return productPageMap[product.Id] || "#";
+function resolveProductUrl(product, category) {
+    return `/product_pages/index.html?product=${product.Id}&category=${category}`;
 }
 
 export default class ProductList {
@@ -35,6 +30,12 @@ export default class ProductList {
         this.dataSource = dataSource;
         this.listElement = listElement;
     }
+
+    async init() {
+        const list = await this.dataSource.getData(this.category);
+        return this.renderList(list);
+    }
+
     /*Next, add a method called renderList(). This method will be responsible for generating the HTML for the product cards
     and inserting them into the listElement */
     async renderList(products = null, options = {}) {
@@ -47,10 +48,10 @@ export default class ProductList {
             clear = false,
         } = options;
 
-        const items = products ?? await this.dataSource.getData(this.category);
+        const items = products ?? [];
 
         const renderPosition = (insertMode ?? position) === "afterbegin" ? "afterbegin" : "replace";
-        const templateFn = (product) => template(product, linkResolver(product));
+        const templateFn = (product) => template(product, linkResolver(product, this.category));
 
         renderListWithTemplate(templateFn, listElement, items, renderPosition, clear);
 
