@@ -53,10 +53,10 @@ export async function loadTemplate(fPath) {
   return templateHTML;
 }
 
-export function LoadHeaderFooter() {
+export async function LoadHeaderFooter() {// had to change to async so below awaits would work... should've seen that coming.
   // 1. load the header and footer templates
-  const headerTemplate = loadTemplate('../partials/header.html');
-  const footerTemplate = loadTemplate('../partials/footer.html');
+  const headerTemplate = await loadTemplate('../partials/header.html');
+  const footerTemplate = await loadTemplate('../partials/footer.html');
 
   // 2. grab the header and footer placeholder elements out of the Document Object Model
   const face = document.getElementById('head'); // header
