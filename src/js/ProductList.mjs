@@ -47,7 +47,7 @@ export default class ProductList {
             clear = false,
         } = options;
 
-        const items = products ?? await this.dataSource.getData();
+        const items = products ?? await this.dataSource.getData(this.category);
 
         const renderPosition = (insertMode ?? position) === "afterbegin" ? "afterbegin" : "replace";
         const templateFn = (product) => template(product, linkResolver(product));

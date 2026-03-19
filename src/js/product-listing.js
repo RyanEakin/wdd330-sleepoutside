@@ -22,7 +22,7 @@ function getSelectedCategory() {
 
 async function getProducts(category) {
     try {
-        return await new ProductData(category).getData();
+        return await new ProductData().getData(category);
     } catch (error) {
         if (category === "hammocks") {
             return [];
