@@ -7,7 +7,10 @@ export function qs(selector, parent = document) {
 
 // retrieve data from localstorage
 export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  if (localStorage.getItem(key) !== null && localStorage.getItem(key) !== '') {
+    // this if statement works to prevent any error where the key's value is empty
+    return JSON.parse(localStorage.getItem(key));
+  }
 }
 // save data to local storage
 export function setLocalStorage(key, data) {
