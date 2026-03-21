@@ -9,23 +9,23 @@
 
   <title>Sleep Outside | Checkout</title>
 
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
   <script src="../js/checkout.js" type="module"></script>
 </head>
 
 <body>
   <header class="divider">
     <div class="logo">
-      <img src="images/noun_Tent_2517.svg" alt="tent image for logo" />
+      <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
 
-      <a href="index.html">
+      <a href="/index.html">
         Sleep
         <span class="highlight">Outside</span>
       </a>
     </div>
 
     <div class="cart">
-      <a href="cart/" aria-label="View shopping cart" title="View shopping cart">
+      <a href="/cart/index.html" aria-label="View shopping cart" title="View shopping cart">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
           <path
             d="M18.9 32.6c1.1 2.4 2.5 3.3 5.4 3.3 1.6 0 3.6-0.3 5.9-0.6 3.2-0.5 6.9-1 11.2-1 2.1 0 4.3 0.1 6.4 0.3 2.1 0.1 4.2 0.3 6.1 0.3 3.2 0 5.2-0.4 5.9-1.2 2.7-2.7 2.8-8.8 2.9-14.6 0.1-6.7 0.2-14.5 4.6-18.7 -0.5 0-1 0-1.6 0 -14.2 0-37.5 0-41.1 0C15.6 6.2 14.9 23.6 18.9 32.6z" />
@@ -54,7 +54,58 @@
 
   <main class="divider">
     <section class="products">
-      <h2>Review & Place your Order</h2>
+      <h2>Review & Place Your Order</h2>
+      <div class="checkout-layout">
+        <form id="checkout-form" class="checkout-form" novalidate>
+          <fieldset>
+            <legend>Customer Name</legend>
+            <label for="firstName">Name</label>
+            <input id="firstName" name="firstName" type="text" required />
+
+            <label for="lastName">Surname</label>
+            <input id="lastName" name="lastName" type="text" required />
+          </fieldset>
+
+          <fieldset>
+            <legend>Address</legend>
+            <label for="street">Address</label>
+            <input id="street" name="street" type="text" required />
+
+            <label for="city">City</label>
+            <input id="city" name="city" type="text" required />
+
+            <label for="state">State</label>
+            <input id="state" name="state" type="text" required />
+
+            <label for="zip">ZIP code</label>
+            <input id="zip" name="zip" type="text" inputmode="numeric" required />
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment</legend>
+            <label for="cardNumber">Credit Card Number</label>
+            <input id="cardNumber" name="cardNumber" type="text" inputmode="numeric" required />
+
+            <label for="expDate">Expiration date</label>
+            <input id="expDate" name="expDate" type="text" placeholder="MM/YY" required />
+
+            <label for="securityCode">Security code</label>
+            <input id="securityCode" name="securityCode" type="text" inputmode="numeric" required />
+          </fieldset>
+
+          <button type="submit">Checkout</button>
+        </form>
+
+        <aside class="checkout-summary" aria-live="polite">
+          <h3>Order Summary</h3>
+          <p><span>Subtotal</span><span id="summary-subtotal">$0.00</span></p>
+          <p><span>Tax</span><span id="summary-tax">$0.00</span></p>
+          <p><span>Shipping estimate</span><span id="summary-shipping">$0.00</span></p>
+          <p class="summary-total"><span>Total order</span><span id="summary-total">$0.00</span></p>
+          <p class="summary-note">Server-side verification is still required in production to prevent tampering with
+            totals.</p>
+        </aside>
+      </div>
     </section>
   </main>
 
