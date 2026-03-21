@@ -1,9 +1,9 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { getParam } from "./utils.mjs";
 
 const category = getParam("category") || "tents";
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const listElement = document.querySelector(".product-list");
 const titleElement = document.querySelector("[data-category-title]");
 const categoryLabel = category

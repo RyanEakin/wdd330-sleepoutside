@@ -1,7 +1,7 @@
 import { getLocalStorage, setLocalStorage, getParam } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const productId = getParam("product") || document.getElementById("addToCart")?.dataset.id;
 const category = getParam("category") || "tents";
 
