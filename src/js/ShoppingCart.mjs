@@ -31,17 +31,17 @@ export default class ShoppingCart {
         // Checks if cartItems exists before trying to render [this fixed the error that would have occured if we didn't check for cartItems existence]
         if (cartItems && cartItems.length > 0) {
             const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-            document.querySelector(this.listElement).innerHTML = htmlItems.join("");
+            qs(this.listElement).innerHTML = htmlItems.join("");
             // this joins every entry from htmlItems into the listElement selected
 
             // Calls the total function
             this.displayCartTotal(cartItems);
         }
         else {
-            const emptyFooter = document.querySelector(".cart-footer")
+            const emptyFooter = qs(".cart-footer")
             emptyFooter.classList.remove("hide"); // shows the cart footer visually
 
-            const emptyTotal = document.querySelector(".cart-total"); // selects the object within the cart footer that shows the final price of the cart
+            const emptyTotal = qs(".cart-total"); // selects the object within the cart footer that shows the final price of the cart
             emptyTotal.innerHTML = "your cart is empty";
         }
     }
@@ -51,8 +51,8 @@ export default class ShoppingCart {
     displayCartTotal(cartItems) {
         // there was no need for an if statement here due to the fact that this wouldn't render if renderShopContents function notes cartItems existence
 
-        const footer = document.querySelector(".cart-footer"); //selects the footer of the cart which is below the product listings
-        const totalElement = document.querySelector(".cart-total"); // selects the object within the cart footer that shows the final price of the cart
+        const footer = document.qs(".cart-footer"); //selects the footer of the cart which is below the product listings
+        const totalElement = document.qs(".cart-total"); // selects the object within the cart footer that shows the final price of the cart
 
         footer.classList.remove("hide"); // shows the cart footer visually
 

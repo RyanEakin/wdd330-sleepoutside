@@ -1,9 +1,9 @@
 import ProductData from "./ProductData.mjs";
 import ProductList from "./ProductList.mjs";
-import { LoadHeaderFooter } from "./utils.mjs";
+import { getParam, LoadHeaderFooter, loadTemplate } from "./utils.mjs";
 
-const category = "tents";
-const targetElement = document.querySelector(".product-list");
+const category = getParam(category);
+const targetElement = qs(".product-list");
 
 LoadHeaderFooter(); // dynamically loads the header and footer
 
