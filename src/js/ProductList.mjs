@@ -11,7 +11,7 @@ function productCardTemplate(product) {
   </li>`
 
     /* this code creates the template for the tent cards... we currently are missing two images for the other tents
-      used and escape cahracter '\' so that the '$' can be shown and used for the tempalte literal
+      and we used an escape character '\' so that the '$' can be shown and used for the template literal
     */
 }
 

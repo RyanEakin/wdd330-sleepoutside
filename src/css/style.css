@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -239,6 +239,23 @@ button {
 .cart-card__price {
   grid-row: 2;
   grid-column: 3;
+}
+
+.category-select {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.category-select a {
+  flex-direction: column;
+  text-align: center;
+  text-decoration: none;
+  color: black
+}
+
+.category-select a img {
+  height: 250px;
 }
 
 @media screen and (min-width: 500px) {
