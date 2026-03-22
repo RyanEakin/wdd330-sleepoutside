@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square>div {
+.logo--square > div {
   margin-top: -1.7em;
 }
 
@@ -251,7 +251,7 @@ button {
   flex-direction: column;
   text-align: center;
   text-decoration: none;
-  color: black
+  color: black;
 }
 
 .category-select a img {

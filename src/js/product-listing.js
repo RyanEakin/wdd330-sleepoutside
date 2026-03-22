@@ -7,7 +7,6 @@ const targetElement = qs(".product-list");
 
 qs(".productType").innerHTML = `${genre} products`;
 
-
 LoadHeaderFooter(); // dynamically loads the header and footer
 
 const productList = new ProductData(genre);
