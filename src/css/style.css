@@ -131,6 +131,31 @@ button {
   fill: gray;
 }
 
+.cart-item-count {
+  display: none;
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  right: -5px;
+  top: 10px;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 10px;
+  font-weight: bold;
+
+  color: white;
+  border-radius: 50%;
+  background: red;
+
+  pointer-events: none;
+}
+
+.cart-item-count.show {
+  display: flex;
+}
+
 /* End cart icon styles */
 
 .mission {
@@ -166,6 +191,30 @@ button {
 .product-list a {
   text-decoration: none;
   color: var(--dark-grey);
+}
+
+/* Styles for product categories */
+
+.product-categories {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  justify-content: space-between;
+  place-items: center;
+  align-items: center;
+
+  text-align: center;
+  font-size: small;
+  font-weight: bold;
+  
+  background-color: #f7f7f7;
+}
+
+.product-categories img {
+  width:  70%;
+  height: 70%;
 }
 
 /* Styles for product lists */
@@ -254,6 +303,11 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+
+  .product-categories img {
+    width:  30%;
+    height: 30%;
   }
 }
 

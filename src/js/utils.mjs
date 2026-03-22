@@ -25,10 +25,37 @@ export function setClick(selector, callback) {
   qs(selector).addEventListener("click", callback);
 }
 
+/**
+ *  Checks whether there are any items in the cart and
+ *    toggles the `show` class to the element to show
+ *    the count if there is more than 1 item. Otherwise
+ *    it will hide the counter element.
+ * 
+ *  Used by all pages which is why it's in utils.
+ */
+export function updateCartItemCount() {
+  const cart = getLocalStorage("so-cart") || [];
+  const itemCount = document.getElementById("cart-item-count");
+
+  //                 .toggle(token: string, force?: boolean)
+  itemCount.classList.toggle('show', cart.length > 0);
+
+  if (cart.length > 0) {
+    itemCount.textContent = cart.length;
+  }
+}
+
+/**
+ *  Returns a specified url parameter.
+ * 
+ * @param {String} param   The parameter value to be returned.
+ * @returns {String|null}  The parameter value if it exists, null if not.
+ */
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get(param)
+  const product = urlParams.get(param);
+
   return product;
 }
 

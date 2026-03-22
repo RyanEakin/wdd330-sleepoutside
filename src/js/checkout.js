@@ -1,3 +1,10 @@
-import { LoadHeaderFooter } from "./utils.mjs";
+import { LoadHeaderFooter, updateCartItemCount } from "./utils.mjs";
 
-LoadHeaderFooter(); // dynamically loads the header and footer
+
+// Asynchronous wrapper for cart item subscript to work
+async function initPage() {
+  await LoadHeaderFooter(); // dynamically loads the header and footer
+  updateCartItemCount();
+}
+
+initPage();
