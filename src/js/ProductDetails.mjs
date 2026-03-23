@@ -1,5 +1,5 @@
 import ProductData from "./ProductData.mjs";
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartItemCount } from "./utils.mjs";
 
 
 export default class ProductDetails {
@@ -27,6 +27,7 @@ export default class ProductDetails {
         cart.push(this.product); //changed this to this.product due to it not working WITHOUT this change
 
         setLocalStorage("so-cart", cart);
+        updateCartItemCount();
     }
 
     renderProductDetails() {
