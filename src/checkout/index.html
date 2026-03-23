@@ -56,6 +56,7 @@
     <section class="products">
       <h2>Review & Place Your Order</h2>
       <div class="checkout-layout">
+        <!-- Checkout form -->
         <form id="checkout-form" class="checkout-form" novalidate>
           <fieldset>
             <legend>Customer Name</legend>
@@ -92,10 +93,10 @@
             <label for="securityCode">Security code</label>
             <input id="securityCode" name="securityCode" type="text" inputmode="numeric" required />
           </fieldset>
-
+          
           <button type="submit">Checkout</button>
         </form>
-
+        <!-- Checkout summary -->
         <aside class="checkout-summary" aria-live="polite">
           <h3>Order Summary</h3>
           <p><span>Items</span><span id="summary-item-count">0</span></p>
