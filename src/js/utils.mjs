@@ -77,6 +77,7 @@ export async function LoadHeaderFooter() {// had to change to async so below awa
   renderWithTemplate(footerTemplate, boot); // renders footer at selected footer element ID
 
   await updateCartItemCount();
+  initBreadcrumb();
 }
 
 /**
@@ -97,4 +98,60 @@ export async function updateCartItemCount() {
   if (cart.length > 0) {
     itemCount.textContent = cart.length;
   }
+}
+
+/**
+ *  Initializes the breadcrumb navigation for the site.
+ * 
+ *  All pages other than the `Home` page will have this
+ *    navigator. This will set the nav element, build
+ *    the breadcrumb path and display it to the user
+ * 
+ *  ////////////////////////////////////////////////////
+ *  //#TODO:
+ *  //This function had been used and developed in tandem
+ *  //  with the w03 homepage API changes to the category
+ *  //  and product listings.
+ *  ////////////////////////////////////////////////////
+ */
+export function initBreadcrumb() {
+  const HIERARCHY = ["", "product_listing", "product_pages"];
+  const LABELS = {
+    "":                { label: "Home",     href: "/" },
+    // href for product_listing is re-set based off of the category
+    "product_listing": { label: "Listing",  href: `/product_listing/?category=${getParam('category')}` },
+    "product_pages":   { label: "Product",  href: "/product_pages/" },
+    "cart":            { label: "Cart",     href: "/cart/" },
+    "checkout":        { label: "Checkout", href: "/checkout/" },
+  };
+
+  // If the header isn't loaded then return
+  const headerEl = document.querySelector('header');
+  if (!headerEl) return;
+
+  // Splits the 'URL' to get the current page
+  const current = window.location.pathname.split("/").filter(p => p.length > 0)[0] ?? ""; // nullish coalescing operator
+  // Return if we're at the home page
+  if (!current || current === 'index.html') {
+    return;
+  }
+
+  // Adding the breadcrumbs after the `header` element, before the `main` element
+  headerEl.insertAdjacentHTML('afterend', '<nav id="breadcrumb" class="breadcrumb-container" aria-label="breadcrumb"></nav>')
+  const container = document.querySelector('.breadcrumb-container');
+
+  // Finds the position of the current page in the array.
+  const hierarchyIndex = HIERARCHY.indexOf(current);
+  // If the current page is found
+  const crumbs = hierarchyIndex >= 0
+    // Slice's hierarchy up to current page, maps each key to its label object
+    ? HIERARCHY.slice(0, hierarchyIndex + 1).map(key => LABELS[key])
+    // Not in hierarchy (cart/checkout pages), just show home and current page
+    : [LABELS[""], LABELS[current]].filter(l => l.length > 0);
+
+  // For each crumb, we're adding a link to the `previous` page, the last displays the current page
+  container.innerHTML = crumbs.map((c, i) => i < crumbs.length - 1
+    ? `<a class="breadcrumb item" href="${c.href}">${c.label}</a>`
+    : `<span class="breadcrumb item">${c.label}</span>`
+  ).join(" &#10095; ");
 }

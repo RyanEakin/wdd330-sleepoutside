@@ -1,8 +1,9 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
-function productCardTemplate(product) {
+// category param for breadcrumb functionality
+function productCardTemplate(product, category) {
     return `<li class="product-card">
-    <a href="/product_pages/?product=${product.Id}">
+    <a href="/product_pages/?product=${product.Id}&category=${category}">
       <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.NameWithoutBrand}" loading="lazy">
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
@@ -28,7 +29,11 @@ export default class ProductList {
     }
 
     renderList(productList) {
-        renderListWithTemplate(productCardTemplate, this.listElement, productList);
+        renderListWithTemplate(
+            (product) => productCardTemplate(product, this.category),
+            this.listElement,
+            productList
+        );
         // this uses the function from utils to get the template cards generated
     }
 }
