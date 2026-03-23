@@ -1,1 +1,0 @@
-import{l as e,u as n}from"./utils-D0sg3CpL.js";/* empty css              */import{P as r}from"./ProductData-HaLBA5Bz.js";import{P as s}from"./ProductList-Di8tIeAE.js";async function a(){await e();const t=document.querySelector("#product-list"),o=new r("tents");new s("tents",o,t).init(),n()}a();
