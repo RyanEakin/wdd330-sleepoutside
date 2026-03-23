@@ -94,6 +94,46 @@ p {
   margin-top: -1.7em;
 }
 
+/* Breadcrumb styles */
+
+.breadcrumb-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0.4rem;
+
+  font-size: small;
+  font-weight: bold;
+
+  justify-content: center;
+}
+
+.breadcrumb {
+  padding: 0.4rem;
+
+  color: black;
+  border: #d0d0d0;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 1px black;
+  background-color: #d0d0d0;
+
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.breadcrumb.arrow {
+  cursor: auto;
+  box-shadow: none;
+  background: none;
+}
+
+.breadcrumb.item {
+  transition: transform 0.3s ease;
+}
+
+.breadcrumb.item:hover {
+  transform: translateY(-1px);
+}
+
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
@@ -305,6 +345,10 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+
+  .breadcrumb-container {
+    font-size: medium;
   }
 
   .product-categories img {
