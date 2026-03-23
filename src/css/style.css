@@ -193,6 +193,32 @@ button {
   color: var(--dark-grey);
 }
 
+/* Styles for product categories */
+
+.product-categories {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  justify-content: space-between;
+  place-items: center;
+  align-items: center;
+
+  text-align: center;
+  font-size: small;
+  font-weight: bold;
+  
+  background-color: #f7f7f7;
+  
+  /* cursor: pointer; */
+}
+
+.product-categories img {
+  width:  70%;
+  height: 70%;
+}
+
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
@@ -279,6 +305,11 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+
+  .product-categories img {
+    width:  30%;
+    height: 30%;
   }
 }
 

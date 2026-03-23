@@ -38,7 +38,7 @@ export default class ProductDetails {
       <section class="product-detail">
         <h3>${p.Brand.Name}</h3>
         <h2 class="divider">${p.NameWithoutBrand}</h2>
-        <img class="divider" src="${p.Image}" alt="${p.NameWithoutBrand}">
+        <img class="divider" src="${p?.Image ? p.Image : p.Images.PrimaryLarge}" alt="${p.NameWithoutBrand}" loading="lazy">
         <p class="product-card__price">$${p.FinalPrice}</p>
         <p class="product__color">${p.Colors[0].ColorName}</p>
         <p class="product__description">${p.DescriptionHtmlSimple}</p>
