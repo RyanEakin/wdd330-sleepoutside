@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleep Outside | Product Make and Name</title>
+    <title>Sleep Outside | Product Listing</title>
 
-    <script type="module" crossorigin src="/assets/product-D93Lw6D_.js"></script>
+    <script type="module" crossorigin src="/assets/listing-TZN7xylx.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/utils-D0sg3CpL.js">
     <link rel="modulepreload" crossorigin href="/assets/ProductData-HaLBA5Bz.js">
+    <link rel="modulepreload" crossorigin href="/assets/ProductList-Di8tIeAE.js">
     <link rel="stylesheet" crossorigin href="/assets/style-DanQytGf.css">
   </head>
 
@@ -17,16 +18,12 @@
     </header>
 
     <main class="divider">
-      <section class="product-detail">
-        <h2></h2>
-        <h3 class="divider"></h3>
-        <img src="" alt="" id="productImage" class="divider">
-        <p id="productPrice" class="product-card__price"></p>
-        <p id="productColor" class="product__color"></p>
-        <p id="productDesc" class="product__description"></p>
-        <div class="product-detail__add">
-          <button id="addToCart" data-id="productId"></button>
-        </div>
+      <section class="products">
+        <h2>Top Products</h2>
+        <!-- Product list dynamically loaded -->
+        <ul id="product-list" class="product-list">
+          <!-- Product cards dynamically loaded -->
+        </ul>
       </section>
     </main>
 
