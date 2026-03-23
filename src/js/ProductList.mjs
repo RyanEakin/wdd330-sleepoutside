@@ -23,7 +23,7 @@ export default class ProductList {
     }
     async init() {
         // sends a promise, await will resolve it.
-        const prodList = await this.dataSource.getData(); // grabs list of json entries and maps to an array
+        const prodList = await this.dataSource.getData(this.category); // grabs list of API json entries and maps to an array
         //console.log(prodList)
         this.renderList(prodList);
     }

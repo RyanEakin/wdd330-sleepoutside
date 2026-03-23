@@ -1,1 +1,0 @@
-import{g as r,q as o,L as e}from"./utils-DeJoPDFN.js";import{P as s}from"./ProductData-Dx0C3TkS.js";import{P as a}from"./ProductList-CjpYvecH.js";const t=r("category"),c=o(".product-list");o(".productType").innerHTML=`${t} products`;e();const n=new s(t),i=new a(t,n,c);i.init();
