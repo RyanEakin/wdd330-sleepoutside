@@ -31,6 +31,35 @@ export function formDataToJSON(formData) {
   return Object.fromEntries(formData.entries());
 }
 
+export function alertMessage(message, scroll = true) {
+  const main = document.querySelector("main");
+  if (!main) return;
+
+  const existingAlert = main.querySelector(".alert");
+  if (existingAlert) {
+    existingAlert.remove();
+  }
+
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `
+    <p>${message}</p>
+    <button type="button" class="alert__close" aria-label="Dismiss alert">X</button>
+  `;
+
+  alert.addEventListener("click", function (e) {
+    if (e.target.classList.contains("alert__close")) {
+      main.removeChild(this);
+    }
+  });
+
+  main.prepend(alert);
+
+  if (scroll) {
+    window.scrollTo(0, 0);
+  }
+}
+
 //make a new function called renderListWithTemplate and export it.It has 5 arguments:templateFn, parentElement, list, position, and clear.
 export function renderListWithTemplate(
   templateFn,

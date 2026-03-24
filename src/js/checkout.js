@@ -1,4 +1,4 @@
-import { loadHeaderFooter } from "./utils.mjs";
+import { alertMessage, loadHeaderFooter } from "./utils.mjs";
 import CheckoutProcess from "./CheckoutProcess.mjs";
 
 loadHeaderFooter();
@@ -38,7 +38,8 @@ function initCheckoutFormValidation() {
             await checkout.checkout(myForm);
             window.location.assign("/checkout/success.html");
         } catch (error) {
-            alert("Unable to submit order. Please try again.");
+            const message = error?.message?.message || error?.message || "Unable to submit order. Please try again.";
+            alertMessage(message);
             console.error(error);
         }
     });
