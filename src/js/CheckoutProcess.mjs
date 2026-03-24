@@ -1,9 +1,11 @@
-import { getLocalStorage } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+import { formDataToJSON, getLocalStorage } from "./utils.mjs";
 
 export default class CheckoutProcess {
     constructor(key, outputSelector) {
         this.key = key;
         this.outputSelector = outputSelector;
+        this.services = new ExternalServices();
         this.list = [];
         this.itemTotal = 0;
         this.shipping = 0;
@@ -62,5 +64,31 @@ export default class CheckoutProcess {
         if (!countElement) return;
 
         countElement.textContent = `${this.itemCount}`;
+    }
+
+    packageItems(items) {
+        return items.map((item) => ({
+            id: item.Id,
+            name: item.Name,
+            price: Number(item.FinalPrice) || 0,
+            quantity: item.quantity || 1,
+        }));
+    }
+
+    async checkout(form) {
+        const formData = new FormData(form);
+        const orderData = formDataToJSON(formData);
+
+        if (!this.orderTotal && this.itemCount > 0) {
+            this.calculateOrderTotal();
+        }
+
+        orderData.orderDate = new Date().toISOString();
+        orderData.items = this.packageItems(this.list);
+        orderData.orderTotal = this.orderTotal.toFixed(2);
+        orderData.shipping = this.shipping;
+        orderData.tax = this.tax.toFixed(2);
+
+        return this.services.checkout(orderData);
     }
 }

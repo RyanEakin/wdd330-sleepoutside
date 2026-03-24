@@ -27,6 +27,10 @@ export function getParam(param) {
   return searchParams.get(param);
 }
 
+export function formDataToJSON(formData) {
+  return Object.fromEntries(formData.entries());
+}
+
 //make a new function called renderListWithTemplate and export it.It has 5 arguments:templateFn, parentElement, list, position, and clear.
 export function renderListWithTemplate(
   templateFn,
