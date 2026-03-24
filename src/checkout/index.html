@@ -57,7 +57,7 @@
       <h2>Review & Place Your Order</h2>
       <div class="checkout-layout">
         <!-- Checkout form -->
-        <form id="checkout-form" class="checkout-form" novalidate>
+        <form id="checkout-form" class="checkout-form">
           <fieldset>
             <legend>Customer Name</legend>
             <label for="firstName">Name</label>
@@ -94,7 +94,7 @@
             <input id="securityCode" name="code" type="text" inputmode="numeric" required />
           </fieldset>
 
-          <button type="submit">Checkout</button>
+          <button id="checkoutSubmit" type="submit">Checkout</button>
         </form>
         <!-- Checkout summary -->
         <aside class="checkout-summary" aria-live="polite">

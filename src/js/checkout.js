@@ -19,17 +19,15 @@ if (zipCodeInput) {
 }
 
 function initCheckoutFormValidation() {
-    const form = document.querySelector("#checkout-form");
-    if (!form) return;
+    const myForm = document.querySelector("#checkout-form");
+    if (!myForm) return;
 
-    form.addEventListener("submit", async (event) => {
-        if (!form.checkValidity()) {
-            event.preventDefault();
-            form.reportValidity();
-            return;
-        }
-
+    myForm.addEventListener("submit", async (event) => {
         event.preventDefault();
+
+        const chk_status = myForm.checkValidity();
+        myForm.reportValidity();
+        if (!chk_status) return;
 
         const zipCodeInput = document.querySelector("#zip");
         if (zipCodeInput?.value.trim()) {
@@ -37,7 +35,7 @@ function initCheckoutFormValidation() {
         }
 
         try {
-            await checkout.checkout(form);
+            await checkout.checkout(myForm);
             alert("Order submitted successfully.");
         } catch (error) {
             alert("Unable to submit order. Please try again.");
