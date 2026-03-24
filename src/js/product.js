@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, getParam } from "./utils.mjs";
+import { alertMessage, getLocalStorage, setLocalStorage, getParam } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const dataSource = new ExternalServices();
@@ -58,6 +58,7 @@ function addProductToCart(product) {
 async function addToCartHandler(e) {
   const product = await dataSource.findProductById(e.target.dataset.id);
   addProductToCart(product);
+  alertMessage(`${product.NameWithoutBrand} was added to your cart.`, false);
 }
 
 initProductPage();
