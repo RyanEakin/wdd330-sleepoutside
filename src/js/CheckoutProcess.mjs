@@ -90,7 +90,17 @@ export default class CheckoutProcess {
             orderData.shipping = this.shipping;
             orderData.tax = this.tax.toFixed(2);
 
-            return await this.services.checkout(orderData);
+            const checkoutResult = await this.services.checkout(orderData);
+
+            localStorage.removeItem(this.key);
+            this.list = [];
+            this.itemTotal = 0;
+            this.shipping = 0;
+            this.tax = 0;
+            this.orderTotal = 0;
+            this.itemCount = 0;
+
+            return checkoutResult;
         } catch (err) {
             console.error("Checkout error:", err);
             throw err;

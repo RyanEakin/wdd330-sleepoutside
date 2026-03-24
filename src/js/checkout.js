@@ -36,7 +36,7 @@ function initCheckoutFormValidation() {
 
         try {
             await checkout.checkout(myForm);
-            alert("Order submitted successfully.");
+            window.location.assign("/checkout/success.html");
         } catch (error) {
             alert("Unable to submit order. Please try again.");
             console.error(error);
