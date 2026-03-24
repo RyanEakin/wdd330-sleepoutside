@@ -131,6 +131,7 @@ export function initBreadcrumb() {
 
   // Splits the 'URL' to get the current page
   const current = window.location.pathname.split("/").filter(p => p.length > 0)[0] ?? ""; // nullish coalescing operator
+  console.log(`current: ${current}`)
   // Return if we're at the home page
   if (!current || current === 'index.html') {
     return;
@@ -147,7 +148,7 @@ export function initBreadcrumb() {
     // Slice's hierarchy up to current page, maps each key to its label object
     ? HIERARCHY.slice(0, hierarchyIndex + 1).map(key => LABELS[key])
     // Not in hierarchy (cart/checkout pages), just show home and current page
-    : [LABELS[""], LABELS[current]].filter(l => l.length > 0);
+    : [LABELS[""], LABELS[current]].filter(l => l !== undefined);
 
   // For each crumb, we're adding a link to the `previous` page, the last displays the current page
   container.innerHTML = crumbs.map((c, i) => i < crumbs.length - 1
