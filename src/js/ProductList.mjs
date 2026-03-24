@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from "./utils.mjs";
+import { renderListWithTemplate, initBreadcrumb } from "./utils.mjs";
 
 // category param for breadcrumb functionality
 function productCardTemplate(product, category) {
@@ -26,6 +26,7 @@ export default class ProductList {
         // sends a promise, await will resolve it.
         const prodList = await this.dataSource.getData(this.category); // grabs list of json entries and maps to an array
         this.renderList(prodList);
+        initBreadcrumb({label: this.category, count: prodList.length})
     }
 
     renderList(productList) {

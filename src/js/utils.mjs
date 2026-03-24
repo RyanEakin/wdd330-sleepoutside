@@ -77,7 +77,7 @@ export async function LoadHeaderFooter() {// had to change to async so below awa
   renderWithTemplate(footerTemplate, boot); // renders footer at selected footer element ID
 
   await updateCartItemCount();
-  initBreadcrumb();
+  if (!window.location.pathname.includes("product_listing")) initBreadcrumb();
 }
 
 /**
@@ -114,13 +114,16 @@ export async function updateCartItemCount() {
  *  //  and product listings.
  *  ////////////////////////////////////////////////////
  */
-export function initBreadcrumb() {
+export function initBreadcrumb(options = {}) {
+  // Capitalize for product listign
+  const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1).replace(/-/g, ' ');
+  const category = getParam('category');
+  const categoryLabel = options.label ?? (category ? category : null);
   const HIERARCHY = ["", "product_listing", "product_pages"];
   const LABELS = {
     "":                { label: "Home",     href: "/" },
-    // href for product_listing is re-set based off of the category
-    "product_listing": { label: "Listing",  href: `/product_listing/?category=${getParam('category')}` },
-    "product_pages":   { label: "Product",  href: "/product_pages/" },
+    "product_listing": { label: categoryLabel && options.count? `${capitalize(categoryLabel)} (${options.count} items)` : "Listing", href: `/product_listing/?category=${category}` },
+    "product_pages":   { label: categoryLabel ?? "Product", href: "/product_pages/" },
     "cart":            { label: "Cart",     href: "/cart/" },
     "checkout":        { label: "Checkout", href: "/checkout/" },
   };
@@ -133,9 +136,7 @@ export function initBreadcrumb() {
   const current = window.location.pathname.split("/").filter(p => p.length > 0)[0] ?? ""; // nullish coalescing operator
   console.log(`current: ${current}`)
   // Return if we're at the home page
-  if (!current || current === 'index.html') {
-    return;
-  }
+  if (!current || current === 'index.html') return;
 
   // Adding the breadcrumbs after the `header` element, before the `main` element
   headerEl.insertAdjacentHTML('afterend', '<nav id="breadcrumb" class="breadcrumb-container" aria-label="breadcrumb"></nav>')
