@@ -8,8 +8,6 @@ const targetElement = qs(".product-list");
 
 qs(".productType").innerHTML = `Top Products: ${genre}`;
 
-
-
 LoadHeaderFooter(); // dynamically loads the header and footer
 
 const productEntries = new ProductList(genre, dataSource, targetElement);

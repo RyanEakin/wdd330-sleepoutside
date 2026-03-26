@@ -1,1 +1,0 @@
-import{g as o,q as r,L as s}from"./utils-DeJoPDFN.js";import{P as a}from"./ProductData-jNZtb5E7.js";import{P as e}from"./ProductList-qiicNpe2.js";const t=o(t),c=r(".product-list");s();const i=new a(t),n=new e(t,i,c);n.init();
