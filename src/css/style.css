@@ -266,6 +266,23 @@ button {
   grid-column: 3;
 }
 
+.category-select {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.category-select a {
+  flex-direction: column;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+}
+
+.category-select a img {
+  height: 250px;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -301,7 +318,6 @@ footer {
   font-size: 1.25rem;
   font-weight: bold;
 }
-
 
 /* Container to keep prices and badge aligned */
 .price-container {

@@ -2,8 +2,8 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 function productCardTemplate(product) {
     return `<li class="product-card">
-    <a href="product_pages/?product=${product.Id}">
-      <img src="${product.Image}" alt="Image of ${product.NameWithoutBrand}">
+    <a href="../product_pages/?product=${product.Id}">
+      <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.NameWithoutBrand}">
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
       <p class="product-card__price">\$${product.ListPrice}</p> 
@@ -11,7 +11,7 @@ function productCardTemplate(product) {
   </li>`
 
     /* this code creates the template for the tent cards... we currently are missing two images for the other tents
-      used and escape cahracter '\' so that the '$' can be shown and used for the tempalte literal
+      and we used an escape character '\' so that the '$' can be shown and used for the template literal
     */
 }
 
@@ -23,7 +23,7 @@ export default class ProductList {
     }
     async init() {
         // sends a promise, await will resolve it.
-        const prodList = await this.dataSource.getData(); // grabs list of json entries and maps to an array
+        const prodList = await this.dataSource.getData(this.category); // grabs list of API json entries and maps to an array
         //console.log(prodList)
         this.renderList(prodList);
     }
