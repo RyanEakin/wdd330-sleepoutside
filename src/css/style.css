@@ -318,3 +318,38 @@ footer {
   font-size: 1.25rem;
   font-weight: bold;
 }
+
+
+/* Container to keep prices and badge aligned */
+.price-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+/* The actual Discount Badge */
+.discount-badge {
+  background-color: var(--tertiary-color);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: var(--font-headline);
+  /* Gives it a bold, "sale" look */
+  font-size: var(--large-font);
+  text-transform: uppercase;
+}
+
+/* The crossed-out original price */
+.original-price {
+  text-decoration: line-through;
+  color: var(--light-grey);
+  font-size: var(--small-font);
+}
+
+.product-card__price {
+  font-size: var(--large-font);
+  font-weight: bold;
+  color: var(--dark-grey);
+  margin: 0;
+}

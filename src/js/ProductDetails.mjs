@@ -40,18 +40,37 @@ export default class ProductDetails {
 function productTemplate(product) {
     //console.log(product.Brand.Name); // used to see what values were present
     document.title = `Sleep Outside | ${product.Name}`; // changes title to tent name
-    const productPrice = `\$${product.ListPrice}`
 
-    //decided to use template literals due to them being easier and also more intuitive then using CreateElement() over and over... also more concise
+    // Discount feature
+    const msrp = product.SuggestedRetailPrice;
+    const finalPrice = product.ListPrice;
+    
+    let discountIndicator = "";
+
+    if (msrp > finalPrice) {
+        const discountPercent = Math.round(((msrp - finalPrice) / msrp) * 100);
+        // Create the HTML for the badge
+        discountIndicator = `<span class="discount-badge">-${discountPercent}%</span>`;
+    }
+
+    // Format prices for display
+    const strikePrice = msrp > finalPrice ? `<span class="original-price">$${msrp}</span>` : "";
+
     return `<section class="product-detail">
-    <h3>${product.Brand.Name}</h3>
-    <h2 class="divider">${product.NameWithoutBrand}</h2>
-    <img class="divider"src="${product.Images.PrimaryLarge}"alt="${product.NameWithoutBrand}" />
-    <p class="product-card__price">${productPrice}</p>
-    <p class="product__color">${product.Colors[0].ColorName}</p>
-    <p class="product__description">${product.DescriptionHtmlSimple}</p>
-    <div class="product-detail__add">
-    <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
-    </div>
-    </section>`
+        <h3>${product.Brand.Name}</h3>
+        <h2 class="divider">${product.NameWithoutBrand}</h2>
+        <img class="divider" src="${product.Image}" alt="${product.NameWithoutBrand}" />
+        
+        <div class="price-container">
+            ${discountIndicator}
+            <p class="product-card__price">$${finalPrice}</p>
+            ${strikePrice}
+        </div>
+
+        <p class="product__color">${product.Colors[0].ColorName}</p>
+        <p class="product__description">${product.DescriptionHtmlSimple}</p>
+        <div class="product-detail__add">
+            <button id="addToCart" data-id="${product.Id}">Add to Cart</button>
+        </div>
+    </section>`;
 }
