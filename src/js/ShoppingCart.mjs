@@ -1,6 +1,7 @@
 import { getLocalStorage, renderListWithTemplate, qs } from "./utils.mjs";
 
 function cartItemTemplate(item) {
+    const itemDelete = `<button class="cart-card_delete" >❌</button>`;
     
     const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
@@ -15,7 +16,7 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
-  <button  class="cart-card_delete" onclick="parentElement.remove()" >❌</button>
+  ${itemDelete}
 </li>`;
 
     return newItem;
@@ -36,6 +37,17 @@ export default class ShoppingCart {
             qs(this.listElement).innerHTML = htmlItems.join("");
             // this joins every entry from htmlItems into the listElement selected
 
+            qs(this.listElement).addEventListener("click", (e)=> {
+                const btn = e.target.closest('.cart-card_delete'); 
+                // adds an event listener to btn's with the cart-card_delete class
+                if (!btn || !qs(this.listElement).contains(btn)) return;
+                // checks if the element that has been acquired indeed has btn, if not return
+
+                qs(".cart-card").remove();
+                this.removeItemById(id);
+
+            })
+
             // Calls the total function
             this.displayCartTotal(cartItems);
         }
@@ -48,7 +60,12 @@ export default class ShoppingCart {
         }
     }
 
-
+removeItemById(id) {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const newItems = cartItems.filter(i => String(i.Id) !== String(id));
+  setLocalStorage("so-cart", newItems); // however you save
+  this.renderCartContents();
+}
 
     displayCartTotal(cartItems) {
         // there was no need for an if statement here due to the fact that this wouldn't render if renderShopContents function notes cartItems existence
