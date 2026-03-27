@@ -1,6 +1,7 @@
 import { getLocalStorage, renderListWithTemplate, qs } from "./utils.mjs";
 
 function cartItemTemplate(item) {
+    
     const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
@@ -14,6 +15,7 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  <button  class="cart-card_delete" onclick="alert('${item.Id}')" >❌</button>
 </li>`;
 
     return newItem;
