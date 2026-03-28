@@ -1,6 +1,8 @@
-import { getLocalStorage, renderListWithTemplate, qs } from "./utils.mjs";
+import { LoadHeaderFooter, setLocalStorage, getLocalStorage, renderListWithTemplate, qs } from "./utils.mjs";
 
 function cartItemTemplate(item) {
+    const itemDelete = `<button class="cart-card_delete" id="${item.Id}">X</button>`;
+
     const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
@@ -14,6 +16,7 @@ function cartItemTemplate(item) {
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
   <p class="cart-card__quantity">qty: 1</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
+  ${itemDelete}
 </li>`;
 
     return newItem;
@@ -34,6 +37,19 @@ export default class ShoppingCart {
             qs(this.listElement).innerHTML = htmlItems.join("");
             // this joins every entry from htmlItems into the listElement selected
 
+            qs(this.listElement).addEventListener("click", (e) => {
+                const btn = e.target.closest('.cart-card_delete');
+                // adds an event listener to btn's with the cart-card_delete class
+                if (!btn || !qs(this.listElement).contains(btn)) return;
+                // checks if the element that has been acquired indeed has btn, if not return
+
+                const prodId = btn.id;
+                // console.log(prodId)
+
+                this.removeItemById(prodId, btn);
+
+            })
+
             // Calls the total function
             this.displayCartTotal(cartItems);
         }
@@ -46,7 +62,25 @@ export default class ShoppingCart {
         }
     }
 
+    removeItemById(id, btn) {
+        const cartItems = getLocalStorage("so-cart") || []; // collects product cart from local storage
 
+        let idx = cartItems.findIndex(i => String(i.Id) === String(id)); // finds first instance of product id and it's index value
+
+        // console.log(idx)
+
+        if (idx !== -1) { // if idx did not return an error (-1) then:
+            cartItems.splice(idx, 1); // cut the item from the index point
+            const dump = btn.closest('.cart-card'); // this selects the parent element of the button [the li element of the card]
+            if (dump) dump.remove(); // this removes the product card that was selected [closest to the current button]
+
+            setLocalStorage("so-cart", cartItems); // saves changes to cart
+            this.renderCartContents(); // re-renders cart contents
+            LoadHeaderFooter(); // re-renders the header and footer so that items in cart number update dynamically
+        }
+
+
+    }
 
     displayCartTotal(cartItems) {
         // there was no need for an if statement here due to the fact that this wouldn't render if renderShopContents function notes cartItems existence
