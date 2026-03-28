@@ -1,4 +1,4 @@
-import{r as c,a as o,q as r,L as n}from"./utils-dNnnFvAX.js";import{P as d}from"./ProductData-sjAax25O.js";function m(t){return`<li class="product-card">
+import{r as c,a as o,q as r,L as n}from"./utils-vlf1gbn4.js";import{P as d}from"./ProductData-sjAax25O.js";function m(t){return`<li class="product-card">
     <a href="../product_pages/?product=${t.Id}">
       <img src="${t.Images.PrimaryMedium}" alt="Image of ${t.NameWithoutBrand}">
       <h2 class="card__brand">${t.Brand.Name}</h2>
