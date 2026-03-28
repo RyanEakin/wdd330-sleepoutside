@@ -156,8 +156,6 @@ button {
   display: flex;
 }
 
-
-
 /* End cart icon styles */
 
 .mission {
@@ -268,8 +266,8 @@ button {
   grid-column: 3;
 }
 .cart-card_delete {
- grid-row: 0;
- grid-column: 4; 
+  grid-row: 0;
+  grid-column: 4;
 }
 
 .category-select {
