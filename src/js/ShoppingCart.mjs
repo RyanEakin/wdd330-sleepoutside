@@ -1,8 +1,8 @@
-import { getLocalStorage, renderListWithTemplate, qs } from "./utils.mjs";
+import { setLocalStorage, getLocalStorage, renderListWithTemplate, qs } from "./utils.mjs";
 
 function cartItemTemplate(item) {
-    const itemDelete = `<button class="cart-card_delete" >❌</button>`;
-    
+    const itemDelete = `<button class="cart-card_delete" id="${item.Id}">X</button>`;
+
     const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
@@ -37,14 +37,16 @@ export default class ShoppingCart {
             qs(this.listElement).innerHTML = htmlItems.join("");
             // this joins every entry from htmlItems into the listElement selected
 
-            qs(this.listElement).addEventListener("click", (e)=> {
-                const btn = e.target.closest('.cart-card_delete'); 
+            qs(this.listElement).addEventListener("click", (e) => {
+                const btn = e.target.closest('.cart-card_delete');
                 // adds an event listener to btn's with the cart-card_delete class
                 if (!btn || !qs(this.listElement).contains(btn)) return;
                 // checks if the element that has been acquired indeed has btn, if not return
 
-                qs(".cart-card").remove();
-                this.removeItemById(id);
+                const prodId = btn.id;
+                // console.log(prodId)
+
+                this.removeItemById(prodId, btn);
 
             })
 
@@ -60,12 +62,22 @@ export default class ShoppingCart {
         }
     }
 
-removeItemById(id) {
-  const cartItems = getLocalStorage("so-cart") || [];
-  const newItems = cartItems.filter(i => String(i.Id) !== String(id));
-  setLocalStorage("so-cart", newItems); // however you save
-  this.renderCartContents();
-}
+    removeItemById(id, btn) {
+        const cartItems = getLocalStorage("so-cart") || []; // collects product cart from local storage
+
+        const idx = cartItems.findIndex(i => String(i.Id) === String(id));
+
+        if (idx !== -1) {
+            cartItems.splice(idx, 1);
+            const dump = btn.closest('.cart-card'); // this selects the parent element of the button [the li element of the card]
+            if (dump) dump.remove(); // this removes the product card that was selected [closest to the current button]
+
+            setLocalStorage("so-cart", cartItems); // saves changes to cart
+            this.renderCartContents(); // re-renders cart contents
+        }
+
+
+    }
 
     displayCartTotal(cartItems) {
         // there was no need for an if statement here due to the fact that this wouldn't render if renderShopContents function notes cartItems existence
