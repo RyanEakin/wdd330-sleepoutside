@@ -20,4 +20,14 @@ export default class ProductData {
       .then(convertToJson) // converts API data to Json
       .then((data) => data.Result); // this returns data.Result instead of data alone.
   }
+  async checkout(payload) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    };
+    return await fetch(`${baseURL}checkout`, options).then(convertToJson);
+  }
 }

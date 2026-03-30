@@ -266,22 +266,100 @@ button {
   grid-column: 3;
 }
 
-.category-select {
+.product-categories {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  justify-content: space-between;
+  place-items: center;
+  align-items: center;
+
+  text-align: center;
+  font-size: small;
+  font-weight: bold;
+  
+  background-color: #f7f7f7;
 }
 
-.category-select a {
+.product-categories a {
   flex-direction: column;
   text-align: center;
   text-decoration: none;
   color: black;
 }
 
-.category-select a img {
-  height: 250px;
+.product-categories img {
+  width:  70%;
+  height: 70%;
 }
+
+
+/* Checkout */
+
+
+.checkout-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+fieldset {
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  border: 1px solid var(--light-grey);
+}
+
+legend {
+  padding: 0 0.5rem;
+  font-weight: bold;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+
+  font-size: var(--small-font);
+  font-weight: bold;
+}
+
+input {
+  margin-top: 0.25rem;
+  padding: 0.4rem;
+
+  font-size: var(--font-base);
+
+  border: 1px solid var(--light-grey);
+}
+
+
+/* Alert */
+
+
+.alert {
+  display: flex;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+
+  align-items: center;
+  justify-content: space-between;
+
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  background-color: #f8d7da;
+
+  cursor: pointer;
+}
+
+.alert span {
+  padding: 0 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 
 @media screen and (min-width: 500px) {
   body {
@@ -296,6 +374,29 @@ button {
   .cart-card {
     font-size: inherit;
     grid-template-columns: 150px auto 15%;
+  }
+
+  .product-categories img {
+    width:  30%;
+    height: 30%;
+  }
+
+  .checkout-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  #checkout-form {
+    flex: 2;
+  }
+
+  .order-summary {
+    position: sticky;
+    padding: 1rem;
+    flex: 1;
+    top: 1rem;
+
+    border: 1px solid var(--light-grey);
   }
 }
 

@@ -91,3 +91,25 @@ export async function updateCartItemCount() {
     itemCount.textContent = cart.length;
   }
 }
+
+/**
+ * Display an alert message at the top of main.
+ * 
+ * @param {String} message - The message to display.
+ * @param {Boolean} scroll - Whether to scroll to the top.
+ */
+export function alertMessage(message, scroll = true) {
+  const main = document.querySelector('main');
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener('click', (e) => {
+    if (e.target.tagName === 'SPAN') {
+      main.removeChild(alert);
+    }
+  });
+
+  main.prepend(alert);
+  if (scroll) window.scrollTo(0, 0);
+}
