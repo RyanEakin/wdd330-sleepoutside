@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, updateCartItemCount } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, updateCartItemCount, alertMessage } from "./utils.mjs";
 
 
 export default class ProductDetails {
@@ -22,11 +22,18 @@ export default class ProductDetails {
     addProductToCart() {// the parameter above is no longer needed due to the product being within the same class
         // Get stored cart, or set as empty array
         const cart = getLocalStorage("so-cart") || [];
+        const existingItem = cart.find(item => item.Id === this.product.Id);
 
-        cart.push(this.product); //changed this to this.product due to it not working WITHOUT this change
+        if (existingItem) {
+            existingItem.quantity = (existingItem.quantity || 1) + 1;
+        } else {
+            cart.push({ ...this.product, quantity: 1 });
+        }
 
         setLocalStorage("so-cart", cart);
         updateCartItemCount();
+        // Set timeout for message to disappear after adding to cart
+        alertMessage(`${this.product.NameWithoutBrand} added to cart!`, false, true);
     }
 
     renderProductDetails() {
@@ -56,7 +63,7 @@ function productTemplate(product) {
     const strikePrice = msrp > finalPrice ? `<span class="original-price">$${msrp}</span>` : "";
 
     return `<section class="product-detail">
-        <h3>${product.Brand.Name}</h3>
+        <h3>${product.Brand.Name}</h3> 
         <h2 class="divider">${product.NameWithoutBrand}</h2>
         <img class="divider" src="${product.Image}" alt="${product.NameWithoutBrand}" />
         

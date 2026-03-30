@@ -2,6 +2,26 @@ import { getLocalStorage, setLocalStorage, alertMessage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 
+function packageItems(items) {
+  return items.map((item) => ({
+    id: item.Id,
+    name: item.Name,
+    price: item.FinalPrice,
+    quantity: item.quantity || 1,
+  }))
+}
+
+function formDataToJSON(formElement) {
+  const formData = new FormData(formElement)
+  const convertedJSON = {};
+
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  })
+
+  return convertedJSON;
+}
+
 export default class CheckoutProcess {
   constructor(key, outputSelector) {
     this.key = key;
@@ -14,13 +34,12 @@ export default class CheckoutProcess {
   }
 
   init() {
-    this.list = getLocalStorage(this.key);
+    this.list = getLocalStorage(this.key) || [];
     this.calculateItemSummary();
 
-    // Recalculate totals when zip is entered
     document.querySelector('#zip').addEventListener('blur', () => {
       if (document.querySelector('#zip').value) {
-        this.calculateOrderTotal()
+        this.calculateOrderTotal();
       }
     });
   }
@@ -29,15 +48,17 @@ export default class CheckoutProcess {
     const itemCount = document.querySelector('#item-count');
     const subtotalEl = document.querySelector('#subtotal');
 
-    this.itemTotal = this.list.reduce((sum, item) => sum + item.FinalPrice, 0);
+    const totalUnits = this.list.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    this.itemTotal = this.list.reduce((sum, item) => sum + item.FinalPrice * (item.quantity || 1), 0);
 
-    if (itemCount) itemCount.textContent = this.list.length;
+    if (itemCount) itemCount.textContent = totalUnits;
     if (subtotalEl) subtotalEl.textContent = `$${this.itemTotal.toFixed(2)}`;
   }
 
   calculateOrderTotal() {
+    const totalUnits = this.list.reduce((sum, item) => sum + (item.quantity || 1), 0);
     this.tax = this.itemTotal * 0.06;
-    this.shipping = this.list.length > 0 ? 10 + (this.list.length - 1) * 2 : 0;
+    this.shipping = totalUnits > 0 ? 10 + (totalUnits - 1) * 2 : 0;
     this.orderTotal = this.itemTotal + this.tax + this.shipping;
 
     this.displayOrderTotals();

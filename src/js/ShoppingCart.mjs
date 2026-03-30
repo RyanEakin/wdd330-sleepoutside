@@ -1,6 +1,7 @@
 import { getLocalStorage, renderListWithTemplate, qs } from "./utils.mjs";
 
 function cartItemTemplate(item) {
+    const qty = item.quantity || 1;
     const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
@@ -12,7 +13,7 @@ function cartItemTemplate(item) {
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
+  <p class="cart-card__quantity">Qty: ${qty}</p>
   <p class="cart-card__price">$${item.FinalPrice}</p>
 </li>`;
 
@@ -30,7 +31,7 @@ export default class ShoppingCart {
 
         // Checks if cartItems exists before trying to render [this fixed the error that would have occured if we didn't check for cartItems existence]
         if (cartItems && cartItems.length > 0) {
-            const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+            const htmlItems = cartItems.map(cartItemTemplate);
             qs(this.listElement).innerHTML = htmlItems.join("");
             // this joins every entry from htmlItems into the listElement selected
 
@@ -56,7 +57,7 @@ export default class ShoppingCart {
 
         footer.classList.remove("hide"); // shows the cart footer visually
 
-        const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
+        const total = cartItems.reduce((sum, item) => sum + item.FinalPrice * (item.quantity || 1), 0);
         // this sums up the final price of the cart listings and their prices into a final price
 
         totalElement.innerText = `Total: \$${total.toFixed(2)}`;

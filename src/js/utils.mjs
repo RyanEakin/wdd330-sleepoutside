@@ -98,7 +98,7 @@ export async function updateCartItemCount() {
  * @param {String} message - The message to display.
  * @param {Boolean} scroll - Whether to scroll to the top.
  */
-export function alertMessage(message, scroll = true) {
+export function alertMessage(message, scroll = true, timeout=false) {
   const main = document.querySelector('main');
   const alert = document.createElement('div');
   alert.classList.add('alert');
@@ -111,5 +111,13 @@ export function alertMessage(message, scroll = true) {
   });
 
   main.prepend(alert);
+
+  if (timeout) {
+    // Remove alert after 3 seconds
+    setTimeout(() => {
+      main.removeChild(alert);
+    }, 3000);
+  }
+
   if (scroll) window.scrollTo(0, 0);
 }
