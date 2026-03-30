@@ -1,4 +1,3 @@
-import ProductData from "./ProductData.mjs";
 import { getLocalStorage, setLocalStorage, updateCartItemCount } from "./utils.mjs";
 
 
