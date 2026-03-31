@@ -265,6 +265,7 @@ button {
   grid-row: 2;
   grid-column: 3;
 }
+
 .cart-card_delete {
   grid-row: 0;
   grid-column: 4;
@@ -326,9 +327,15 @@ footer {
 /* Container to keep prices and badge aligned */
 .price-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 0.75rem;
   margin: 1rem 0;
+
+  & a {
+    /*added this nested css to get the a element to have a row of values instead of column of them*/
+    display: flex;
+  }
 }
 
 /* The actual Discount Badge */
@@ -341,12 +348,15 @@ footer {
   /* Gives it a bold, "sale" look */
   font-size: var(--large-font);
   text-transform: uppercase;
+  height: 50%;
+  /*added this to make sure that the badge looked nice*/
 }
 
 /* The crossed-out original price */
 .original-price {
   text-decoration: line-through;
-  color: var(--light-grey);
+  color: var(--dark-grey);
+  /*changed this to dark grey so that others can see it*/
   font-size: var(--small-font);
 }
 

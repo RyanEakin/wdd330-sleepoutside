@@ -1,12 +1,34 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
+
 function productCardTemplate(product) {
+
+    // Discount feature
+    const msrp = product.SuggestedRetailPrice;
+    const finalPrice = product.ListPrice;
+
+    let discountIndicator = "";
+
+    if (msrp > finalPrice) {
+        const discountPercent = Math.round(((msrp - finalPrice) / msrp) * 100);
+        // Create the HTML for the badge
+        discountIndicator = `<span class="discount-badge">-${discountPercent}%</span>`;
+    }
+
+    // Format prices for display
+    const strikePrice = msrp > finalPrice ? `<span class="original-price">$${msrp}</span>` : "";
+
+
     return `<li class="product-card">
     <a href="../product_pages/?product=${product.Id}">
       <img src="${product.Images.PrimaryMedium}" alt="Image of ${product.NameWithoutBrand}">
       <h2 class="card__brand">${product.Brand.Name}</h2>
       <h3 class="card__name">${product.NameWithoutBrand}</h3>
+      <div class="price-container">
+      ${discountIndicator}
       <p class="product-card__price">\$${product.ListPrice}</p> 
+      ${strikePrice}
+      <div>
     </a>
   </li>`
 
