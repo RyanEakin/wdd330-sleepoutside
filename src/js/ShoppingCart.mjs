@@ -97,4 +97,18 @@ export default class ShoppingCart {
         // this showcases the cart total up to two decimal points to the right
 
     }
+
+    animateCartIcon() {
+        // Target the backpack icon (adjust selector if your HTML differs)
+        const cartIcon = qs(".cart > a") || qs(".cart");
+        
+        if (cartIcon) {
+            cartIcon.classList.add("animate-cart");
+
+            // Remove the class after the animation ends (0.5s) to allow re-triggering
+            cartIcon.addEventListener("animationend", () => {
+                cartIcon.classList.remove("animate-cart");
+            }, { once: true });
+        }
+    }
 }

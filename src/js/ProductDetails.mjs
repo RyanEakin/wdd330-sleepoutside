@@ -28,6 +28,19 @@ export default class ProductDetails {
 
         setLocalStorage("so-cart", cart);
         updateCartItemCount();
+
+        const cartIcon = document.querySelector(".cart"); 
+    
+        if (cartIcon) {
+            // Add the animation class
+            cartIcon.classList.add("animate-backpack");
+
+            // Remove it after the animation completes (500ms) 
+            // so it can be triggered again on the next click
+            cartIcon.addEventListener("animationend", () => {
+                cartIcon.classList.remove("animate-backpack");
+            }, { once: true });
+        }
     }
 
     renderProductDetails() {
