@@ -366,3 +366,35 @@ footer {
   color: var(--dark-grey);
   margin: 0;
 }
+
+@keyframes backpack-wiggle {
+  0% {
+    transform: scale(1) rotate(0);
+  }
+
+  20% {
+    transform: scale(1.2) rotate(-8deg);
+  }
+
+  40% {
+    transform: scale(1.2) rotate(8deg);
+  }
+
+  60% {
+    transform: scale(1.2) rotate(-8deg);
+  }
+
+  80% {
+    transform: scale(1.2) rotate(8deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+.animate-backpack {
+  display: inline-block;
+  /* Required for transforms to work on some elements */
+  animation: backpack-wiggle 0.5s ease-in-out;
+}
