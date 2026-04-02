@@ -90,7 +90,7 @@ p {
   margin-top: -1.3em;
 }
 
-.logo--square > div {
+.logo--square>div {
   margin-top: -1.7em;
 }
 
@@ -269,6 +269,10 @@ button {
 .cart-card_delete {
   grid-row: 0;
   grid-column: 4;
+}
+
+.checkout {
+  margin-left: 83%;
 }
 
 .category-select {
