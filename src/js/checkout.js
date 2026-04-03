@@ -1,7 +1,7 @@
 import { LoadHeaderFooter } from "./utils.mjs";
-import ShoppingCart from "./ShoppingCart.mjs"
+import CheckoutProcess from "./CheckoutProcess.mjs"
 
 LoadHeaderFooter(); // dynamically loads the header and footer
 
-const cart = new ShoppingCart(".product-list");
-cart.renderCartContents();  
+const check = new CheckoutProcess("so-cart",".cart-summary");
+check.init();
