@@ -19,7 +19,7 @@
       <div class="check-form">
       <section class="products">
         <h2>Review & Place your Order</h2>
-        <form action="POST">
+        <form action="POST" id="checkout-form">
           <Fieldset>
             <legend>Name</legend>
             <Label>First Name<Input type="text" name="fname" required></Input></Label>
@@ -41,14 +41,16 @@
         </form>
       </section>
       <section class="cart-summary">
-        <p>Subtotal:</p>
+        <p class="cart-total">Subtotal: <span id="total-amount"></span></p>
+        <ul class="product-list">Subtotal:</ul>
         <!--have a list of the current items in cart with price-->
-        <p>Tax: </p>
-        <p>Shipping Estimate</p>
-        <p class="cart-total">Order Total: <span id="total-amount"></span></p>
-        <button>Checkout</button>
+        <p>Tax: <span></span></p>
+        <p>Shipping Estimate: <span></span></p>
+        <p>Total: </p>
+          <button type="submit" form="checkout-form">Checkout</button>
       </section>
       </div>
+      
     </main>
 
     <footer id="foot">&copy;NOT a real business</footer>

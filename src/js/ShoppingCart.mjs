@@ -2,8 +2,13 @@ import { LoadHeaderFooter, setLocalStorage, getLocalStorage, renderListWithTempl
 
 function cartItemTemplate(item) {
     const itemDelete = `<button class="cart-card_delete" id="${item.Id}">X</button>`;
+    let li_type = `<li class="cart-card divider">`
 
-    const newItem = `<li class="cart-card divider">
+    if(window.location.pathname === "/checkout/index.html"){
+        li_type = `<li class="checkout-card divider">`
+    }
+
+    const newItem = `${li_type}
   <a href="#" class="cart-card__image">
     <img
       src="${item.Images.PrimarySmall}"
@@ -88,12 +93,18 @@ export default class ShoppingCart {
         const footer = qs(".cart-footer"); //selects the footer of the cart which is below the product listings
         const totalElement = qs(".cart-total"); // selects the object within the cart footer that shows the final price of the cart
 
-        footer.classList.remove("hide"); // shows the cart footer visually
-
+        if(footer){
+            footer.classList.remove("hide"); // shows the cart footer visually
+        }
         const total = cartItems.reduce((sum, item) => sum + item.FinalPrice, 0);
         // this sums up the final price of the cart listings and their prices into a final price
 
-        totalElement.innerText = `Total: \$${total.toFixed(2)}`;
+        if(window.location.pathname === "/cart/index.html"){
+            totalElement.innerText = `Total: \$${total.toFixed(2)}`;
+        }
+        else {
+            totalElement.innerText = `Subtotal: \$${total.toFixed(2)}`;
+        }
         // this showcases the cart total up to two decimal points to the right
 
     }
