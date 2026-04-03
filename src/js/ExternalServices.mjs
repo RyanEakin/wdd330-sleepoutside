@@ -8,7 +8,7 @@ function convertToJson(res) {
   }
 }
 
-export default class ProductData {
+export default class ExternalServices {
 
   async getData(category) {
     return await fetch(`${baseURL}products/search/${category} `) // fetches from API, category data
@@ -19,5 +19,15 @@ export default class ProductData {
     return await fetch(`${baseURL}product/${id} `) // this calls the product json data via the API directly
       .then(convertToJson) // converts API data to Json
       .then((data) => data.Result); // this returns data.Result instead of data alone.
+  }
+  async checkout(payload){
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+    return await fetch(`${baseURL}checkout/`, options).then(convertToJson);
   }
 }

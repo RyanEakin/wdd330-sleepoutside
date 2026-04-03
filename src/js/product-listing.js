@@ -1,9 +1,9 @@
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 import { getParam, LoadHeaderFooter, qs } from "./utils.mjs";
 
 const genre = getParam("category");
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const targetElement = qs(".product-list");
 
 qs(".productType").innerHTML = `Top Products: ${genre}`;
