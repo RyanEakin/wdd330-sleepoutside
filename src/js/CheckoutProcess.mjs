@@ -1,5 +1,20 @@
 import ShoppingCart from "./ShoppingCart.mjs";
 import { getLocalStorage, qs } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+
+const services = new ExternalServices();
+
+function formToJSON(formElement) {
+  const formData = new FormData(formElement),
+    convertedJSON = {};
+
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
+}
+
 
 export default class CheckoutProcess {
     constructor(key,outputSelector){
@@ -50,4 +65,38 @@ export default class CheckoutProcess {
         const total = qs(`${this.outputSelector} #orderTotal`);
         total.innerText = `$${this.orderTotal.toFixed(2)}`;
     }
-}
+
+    packageItems(items){
+        const htmlItems = items.map((item) => {
+                //console.log(items)
+                return { 
+                    // this acts like a filter only returning THESE values
+                    //  as a new element within the new array
+                    id: item.Id,
+                    price: item.FinalPrice,
+                    name: item.Name,
+                    quantity: 1,
+                };
+        });
+        return htmlItems;
+    }
+    async checkout(){
+
+        const fElement = document.forms["checkout-form"];
+        const list = formToJSON(fElement);
+
+        list.orderDate = new Date().toISOString();
+        list.orderTotal = this.orderTotal.toFixed(2);
+        list.tax = this.tax.toFixed(2);
+        list.shipping = this.shipping;
+        list.items = this.packageItems(this.list);
+        console.log(list);
+
+    try {
+      const response = await services.checkout(list);
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+    }
