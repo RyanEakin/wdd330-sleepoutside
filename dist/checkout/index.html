@@ -8,10 +8,10 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <script type="module" crossorigin src="/assets/checkout-BKZMkm41.js"></script>
+    <script type="module" crossorigin src="/assets/checkout-D4wiaTn0.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/utils-b2Fh0cpI.js">
     <link rel="modulepreload" crossorigin href="/assets/ShoppingCart-B6qC1y6m.js">
-    <link rel="modulepreload" crossorigin href="/assets/ExternalServices-BSXgLSyf.js">
+    <link rel="modulepreload" crossorigin href="/assets/ExternalServices-BwBjQ_cY.js">
     <link rel="stylesheet" crossorigin href="/assets/utils-Bbqv9cUt.css">
   </head>
 
@@ -22,7 +22,7 @@
       <div class="check-form">
       <section class="products">
         <h2>Review & Place your Order</h2>
-        <form id="checkout-form">
+        <form action="/checkout/success.html" id="checkout-form">
           <Fieldset>
             <legend>Name</legend>
             <Label>First Name<Input type="text" name="fname" required></Input></Label>
@@ -33,12 +33,12 @@
             <Label>Street Address<Input type="text" name="street" required></Input></Label>
             <Label>City<Input type="text" name="city" required></Input></Label>
             <Label>State<Input type="text" name="state" required></Input></Label>
-            <Label>Zip-Code<Input type="text" name="zipCode" required></Input></Label>
+            <Label>Zip-Code<Input type="text" name="zip" required></Input></Label>
           </fieldset>
           <fieldset>
             <legend>Payment</legend>
-            <Label>Credit Card Number<Input type="text" name="CCnum" value="1234123412341234" required></Input></Label>
-            <Label>Expiration Date<Input type="text" name="ExpirDate" required></Input></Label>
+            <Label>Credit Card Number<Input type="text" name="cardNumber" value="1234123412341234" required></Input></Label>
+            <Label>Expiration Date<Input type="text" name="expiration" required></Input></Label>
             <Label>Security Code<Input type="text" name="SecCode" value="123" required></Input></Label>
           </fieldset>
         </form>
@@ -50,7 +50,7 @@
         <p>Tax: <span id="tax"></span></p>
         <p>Shipping Estimate: <span id="ship"></span></p>
         <p>Total: <span id="orderTotal"></span></p>
-          <button type="submit" form="checkout-form" id="checkingOut">Checkout</button>
+          <button type="submit" form="checkout-form" action="/checkout/success.html" id="checkingOut">Checkout</button>
       </section>
       </div>
       

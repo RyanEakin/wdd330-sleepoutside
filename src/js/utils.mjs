@@ -90,4 +90,31 @@ export async function updateCartItemCount() {
   if (cart.length > 0) {
     itemCount.textContent = cart.length;
   }
+
+  
+}
+
+export function alertMessage(message, scroll = true) {
+  // can add duration later if I want to add a timed error message; 
+  // apparently the default for required ALSO adds their own message so that's fun
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alert.addEventListener("click", function (e) {
+    if (e.target.tagName == "SPAN") {
+      main.removeChild(this);
+    }
+  });
+  const main = qs("main");
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if (scroll) window.scrollTo(0, 0);
+
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => qs("main").removeChild(alert));
 }

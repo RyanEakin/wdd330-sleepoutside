@@ -1,5 +1,5 @@
 import ShoppingCart from "./ShoppingCart.mjs";
-import { getLocalStorage, qs } from "./utils.mjs";
+import { getLocalStorage, qs, setLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -90,12 +90,19 @@ export default class CheckoutProcess {
         list.tax = this.tax.toFixed(2);
         list.shipping = this.shipping;
         list.items = this.packageItems(this.list);
-        console.log(list);
+        console.log(list);  
 
     try {
+      //this try block tests if it is possible to run the below code if not, go to catch.
+      setLocalStorage("so-cart", []);
       const response = await services.checkout(list);
       console.log(response);
     } catch (err) {
+      // get rid of any preexisting alerts.
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
       console.log(err);
     }
   }
