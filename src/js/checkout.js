@@ -1,4 +1,4 @@
-import { qs, LoadHeaderFooter, setLocalStorage } from "./utils.mjs";
+import { qs, LoadHeaderFooter } from "./utils.mjs";
 import CheckoutProcess from "./CheckoutProcess.mjs";
 
 LoadHeaderFooter(); // dynamically loads the header and footer

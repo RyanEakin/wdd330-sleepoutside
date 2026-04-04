@@ -98,6 +98,11 @@ export default class CheckoutProcess {
       const response = await services.checkout(list);
       console.log(response);
     } catch (err) {
+      // get rid of any preexisting alerts.
+      removeAllAlerts();
+      for (let message in err.message) {
+        alertMessage(err.message[message]);
+      }
       console.log(err);
     }
   }
